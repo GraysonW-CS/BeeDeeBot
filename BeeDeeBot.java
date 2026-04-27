@@ -96,24 +96,24 @@ public class BeeDeeBot extends LinearOpMode {
 
             // POV Mode uses left stick to go forward, and right stick to turn.
             // - This uses basic math to combine motions and is easier to drive straight.
-            double drive = gamepad1.left_stick_y;
-            double turn  = -gamepad1.right_stick_x;
-            leftPower    = Range.clip(drive - turn, -1.0, 1.0) ;
-            rightPower   = Range.clip(drive + turn, -1.0, 1.0) ;
+            double drive = -gamepad1.left_stick_y;
+            double turn  = gamepad1.right_stick_x;
+            leftPower    = Range.clip(drive + turn, -1.0, 1.0) ;
+            rightPower   = Range.clip(drive - turn, -1.0, 1.0) ;
             
-            if(gamepad1.left_bumper == true){
+            if(gamepad1.x == true){
                 hand.setPosition(0.02);
             }
             
-            if(gamepad1.right_bumper == true){
+            if(gamepad1.y == true){
+                hand.setPosition(0.07);
+            }
+            
+            if(gamepad1.b == true){
                 hand.setPosition(0.7);
             }
 
-            // Tank Mode uses one stick to control each wheel.
-            // - This requires no math, but it is hard to drive forward slowly and keep straight.
-            // leftPower  = -gamepad1.left_stick_y ;
-            // rightPower = -gamepad1.right_stick_y ;
-
+ 
             // Send calculated power to wheels
             leftDrive.setPower(leftPower);
             rightDrive.setPower(rightPower);
